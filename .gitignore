@@ -24,7 +24,7 @@ yarn-error.log
 __pycache__/
 *.pyc
 node_modules/
-.env
+backend/.env
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
