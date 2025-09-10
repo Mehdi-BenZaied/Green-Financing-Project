@@ -25,6 +25,8 @@ __pycache__/
 *.pyc
 node_modules/
 backend/.env
+backend/wait_for_db.py
+backend/db.py
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
