@@ -1,0 +1,93 @@
+<h2 class="title">❓ Gestion des Questions</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Question</th>
+        <th>Type</th>
+        <th>Options</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of questions">
+        <td>{{ q.question_id }}</td>
+        <td>{{ q.texte }}</td>
+        <td>{{ q.type_question }}</td>
+        <td>
+          <ul *ngIf="q.type_question === 'choix_multiple' || q.type_question === 'choix_binaire ' || q.type_question ==='texte_libre'">
+            <li *ngFor="let option of q.options">{{ option }}</li>
+          </ul>
+          <span *ngIf="q.type_question !== 'checkbox' && q.type_question !== 'radio'">-</span>
+        </td>
+        <td>
+          <button class="edit-btn" (click)="remplirFormulaire(q)">✏ Modifier</button>
+          <button class="delete-btn" (click)="supprimerQuestion(q.question_id)">🗑 Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ✅ Formulaire d'ajout d'une nouvelle question -->
+<div class="form-container">
+  <h3>➕ Ajouter une Question</h3>
+
+  <label>Texte de la Question :</label>
+  <input type="text" [(ngModel)]="nouvelleQuestion.texte">
+
+  <label>Type de Question :</label>
+  <select [(ngModel)]="nouvelleQuestion.type_question">
+    <option value="text">Texte</option>
+    <option value="number">Nombre</option>
+    <option value="checkbox">Choix Multiple</option>
+    <option value="radio">Choix Unique</option>
+  </select>
+
+  <!-- ✅ Section pour les options -->
+  <div *ngIf="nouvelleQuestion.type_question === 'choix_multiple' || nouvelleQuestion.type_question === 'choix_binaire'">
+    <h4>Options :</h4>
+    <div *ngFor="let option of nouvelleQuestion.options; let i = index">
+      <input type="text" [(ngModel)]="nouvelleQuestion.options[i]" placeholder="Option {{ i + 1 }}">
+      <button (click)="supprimerOption(i)">❌</button>
+    </div>
+    <button (click)="ajouterOption()">➕ Ajouter une option</button>
+  </div>
+
+  <div class="button-group">
+    <button class="add-btn" (click)="ajouterQuestion()">➕ Ajouter</button>
+  </div>
+</div>
+
+<!-- ✅ Formulaire de modification -->
+<div class="form-container" *ngIf="editing">
+  <h3>✏ Modifier la Question</h3>
+
+  <label>Texte de la Question :</label>
+  <input type="text" [(ngModel)]="nouvelleQuestion.texte">
+
+  <label>Type de Question :</label>
+  <select [(ngModel)]="nouvelleQuestion.type_question">
+    <option value="text">Texte</option>
+    <option value="number">Nombre</option>
+    <option value="choix_multiple">Choix Multiple</option>
+    <option value="radio">Choix Unique</option>
+  </select>
+
+  <!-- ✅ Gestion des options pour modification -->
+  <div *ngIf="nouvelleQuestion.type_question === 'choix_multiple' || nouvelleQuestion.type_question === 'radio'">
+    <h4>Options :</h4>
+    <div *ngFor="let option of nouvelleQuestion.options; let i = index">
+      <input type="text" [(ngModel)]="nouvelleQuestion.options[i]" placeholder="Option {{ i + 1 }}">
+      <button (click)="supprimerOption(i)">❌</button>
+    </div>
+    <button (click)="ajouterOption()">➕ Ajouter une option</button>
+  </div>
+
+  <div class="button-group">
+    <button class="update-btn" (click)="modifierQuestion()">✅ Mettre à Jour</button>
+    <button class="cancel-btn" (click)="annulerModification()">❌ Annuler</button>
+  </div>
+</div>

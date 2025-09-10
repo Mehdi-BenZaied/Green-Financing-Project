@@ -1,0 +1,38 @@
+<h2 class="title">📝 Réponses des Clients</h2>
+
+
+<!-- Table des réponses -->
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Entreprise</th>
+        <th>Question</th>
+        <th>Réponse</th>
+        <th>Date de Réponse</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rep of reponses">
+        <td>{{ rep.nom }}</td>
+        <td>{{ rep.entreprise_nom }}</td>
+        <td>{{ rep.question_texte }}</td>
+        <td>{{ rep.reponse_texte }}</td>
+        <td>{{ rep.date_reponse | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <!-- Boutons d'actions -->
+          <button class="delete-btn" (click)="supprimerReponse(rep.reponse_id)">🗑 Supprimer</button>
+          <button class="validate-btn" (click)="validerReponse(rep.reponse_id)">✅ Valider</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Formulaire de modification de la réponse -->
+<div *ngIf="editingReponse" class="edit-form">
+  <h3>✏ Modifier la Réponse</h3>
+  <textarea [(ngModel)]="reponseModifiee.reponse_texte" placeholder="Modifier la réponse..."></textarea>
+</div>

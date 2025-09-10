@@ -1,0 +1,36 @@
+<h2>📈 Suivi de vos projets de financement</h2>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<table class="table" *ngIf="projets.length > 0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Montant (TND)</th>
+      <th>Statut</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let projet of projets">
+      <td>{{ projet.projet_id }}</td>
+      <td>{{ projet.titre }}</td>
+      <td>{{ projet.description }}</td>
+      <td>{{ projet.montant_recherche }}</td>
+      <td>
+        <span [ngClass]="{
+          'statut-attente': projet.statut === 'En attente',
+          'statut-valide': projet.statut === 'Validé',
+          'statut-rejete': projet.statut === 'Rejeté'
+        }">{{ projet.statut }}</span>
+      </td>
+      <td>{{ projet.date_creation }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="projets.length === 0 && !errorMessage" class="info">
+  🕵️ Aucun projet trouvé.
+</div>

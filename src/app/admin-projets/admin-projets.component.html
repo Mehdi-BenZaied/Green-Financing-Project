@@ -1,0 +1,42 @@
+<h2>📁 Gestion des Projets de Financement</h2>
+
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Montant (TND)</th>
+      <th>Client</th>
+      <th>Entreprise</th>
+      <th>Date</th>
+      <th>Statut</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let projet of projets">
+      <td>{{ projet.projet_id }}</td>
+      <td>{{ projet.titre }}</td>
+      <td>{{ projet.description }}</td>
+      <td>{{ projet.montant_recherche }}</td>
+      <td>{{ projet.client_nom }}</td>
+      <td>{{ projet.entreprise_nom }}</td>
+      <td>{{ projet.date_creation }}</td>
+      <td>
+        <span [ngClass]="{
+          'statut-attente': projet.statut === 'En attente',
+          'statut-valide': projet.statut === 'Validé',
+          'statut-rejete': projet.statut === 'Rejeté'
+        }">{{ projet.statut }}</span>
+      </td>
+      <td>
+        <button (click)="updateStatut(projet.projet_id, 'Validé')">✅ Valider</button>
+        <button (click)="updateStatut(projet.projet_id, 'Rejeté')">❌ Rejeter</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

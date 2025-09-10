@@ -1,0 +1,92 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">Formulaire de Financement</h2>
+    <p class="auth-subtitle">Merci de répondre à toutes les questions</p>
+
+    <form [formGroup]="financementForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <div *ngFor="let question of questions" class="form-group" [hidden]="!question.visible">
+        <label><strong>{{ question.texte }}</strong></label>
+
+        <!-- ✅ Choix multiple (checkbox) -->
+        <div *ngIf="question.type_question === 'choix_multiple'">
+          <div *ngFor="let option of question.options" class="option-group">
+            <label>
+              <input
+                type="checkbox"
+                [checked]="isChecked(question.question_id, option)"
+                (change)="onCheckboxChange($event, question.question_id, option)"
+              />
+              {{ option }}
+            </label>
+          </div>
+
+          <!-- Zone texte pour l'option Autre -->
+          <div *ngIf="isChecked(question.question_id, 'Autre')" class="input-group">
+            <label>Veuillez préciser :</label>
+            <textarea
+              class="form-control"
+              rows="2"
+              [formControlName]="'Autre' + question.question_id"
+              placeholder="Votre réponse">
+            </textarea>
+          </div>
+        </div>
+
+        <!-- ✅ Choix binaire (oui/non radio) -->
+        <div *ngIf="question.type_question === 'choix_binaire'">
+          <mat-radio-group [formControlName]="'question_' + question.question_id">
+            <mat-radio-button value="oui">Oui</mat-radio-button>
+            <mat-radio-button value="non">Non</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- ✅ Autres types (texte, number...) -->
+        <div *ngIf="question.type_question !== 'choix_multiple' && question.type_question !== 'choix_binaire'" class="input-group">
+          <input
+            [type]="question.type_question"
+            class="form-control"
+            [formControlName]="'question_' + question.question_id"
+            [placeholder]="question.placeholder || 'Votre réponse...'" />
+        </div>
+      </div>
+
+      <!-- ✅ Bouton de soumission -->
+      <button class="auth-button" type="submit" [disabled]="financementForm.invalid">
+        Soumettre
+      </button>
+
+      <!-- ✅ Message de redirection -->
+      <div *ngIf="showRedirectMessage" class="auth-footer">
+        ✅ Votre recommandation sera prête dans 5 secondes...
+      </div>
+
+      <!-- ✅ Recommandation existante -->
+      <div class="auth-footer" *ngIf="hasRecommendation && !showRedirectMessage">
+        <p>Vous avez déjà une recommandation disponible.</p>
+        <a (click)="viewRecommendation()" style="cursor: pointer;">Voir la recommandation</a> |
+        <a (click)="fillNewForm()" style="cursor: pointer;">Remplir un nouveau formulaire</a>
+      </div>
+    </form>
+
+    <!-- ✅ Création de projet -->
+    <div *ngIf="showRedirectMessage" class="project-prompt">
+      <h3 class="text-center">💡 Souhaitez-vous créer un projet de financement vert ?</h3>
+      <div class="btn-group">
+        <button class="btn btn-success" (click)="navigateToCreateProject()">✅ Oui, créer un projet</button>
+        <button class="btn btn-secondary" (click)="navigateToHome()">❌ Non, revenir à l'accueil</button>
+      </div>
+    </div>
+
+    <!-- ✅ Lien de suivi projet -->
+    <div class="auth-footer" *ngIf="hasProjet && !showRedirectMessage">
+      <a routerLink="/suivie" class="btn-link" style="cursor: pointer;">📁 Suivre mes projets</a>
+    </div>
+
+    <!-- ✅ Déconnexion -->
+    <div class="auth-footer">
+      <a (click)="logout()" style="cursor: pointer;">Se déconnecter</a>
+    </div>
+  </div>
+</div>

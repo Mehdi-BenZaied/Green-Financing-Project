@@ -1,0 +1,40 @@
+<div class="create-projet-container">
+    <h2>Créer un Projet de Financement Vert</h2>
+    
+    <form [formGroup]="projetForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Titre -->
+      <label for="titre">Titre</label>
+      <input
+        type="text"
+        id="titre"
+        formControlName="titre"
+        placeholder="Titre du projet"
+      />
+  
+      <!-- Description -->
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Décrivez brièvement votre projet"
+      ></textarea>
+  
+      <!-- Montant recherché -->
+      <label for="montant">Montant recherché (TND)</label>
+      <input
+        type="number"
+        id="montant"
+        formControlName="montant_recherche"
+        placeholder="Ex : 5000"
+      />
+  
+      <!-- Bouton de soumission -->
+      <button type="submit">Soumettre</button>
+  
+      <!-- Messages de retour -->
+      <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </form>
+  </div>
+  

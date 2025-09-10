@@ -1,0 +1,26 @@
+<h2 class="title">📋 Liste des Utilisateurs</h2>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Entreprise</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of utilisateurs">
+        <td>{{ user.client_id }}</td>
+        <td>{{ user.nom }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.entreprise }}</td>
+        <td>
+          <button class="delete-btn" (click)="supprimerUtilisateur(user.client_id)">🗑 Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,39 @@
+<div class="recommendation-container" *ngIf="recommendation?.themes?.length">
+
+  <h2>🌿 Recommandation Personnalisée</h2>
+  <mat-accordion multi>
+    <mat-expansion-panel *ngFor="let theme of recommendation.themes">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ theme.label }} (détecté {{ theme.count }} fois)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="theme.bonnes_pratiques?.length">
+        <h4>✅ Bonnes pratiques :</h4>
+        <ul>
+          <li *ngFor="let bp of theme.bonnes_pratiques">{{ bp }}</li>
+        </ul>
+      </div>
+
+      <div *ngIf="theme.autres_solutions?.length">
+        <h4>💡 Autres solutions :</h4>
+        <ul>
+          <li *ngFor="let sol of theme.autres_solutions">{{ sol }}</li>
+        </ul>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p class="confidence" *ngIf="recommendation.confidence">
+    🔍 Score de confiance : {{ recommendation.confidence * 100 | number:'1.0-0' }}%
+  </p>
+  <div *ngIf="showRedirectMessage" class="project-prompt">
+    <h3 class="text-center">💡 Souhaitez-vous créer un projet de financement vert ?</h3>
+    <div class="btn-group">
+      <button class="btn btn-success" (click)=" navigateToCreateProject()">✅ Oui, créer un projet</button>
+      <button class="btn btn-secondary" (click)="navigateToHome()">❌ Non, revenir à l'accueil</button>
+    </div>
+  </div>
+</div>

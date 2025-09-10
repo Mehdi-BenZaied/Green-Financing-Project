@@ -1,0 +1,18 @@
+.recommendation-container {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 2rem;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    background-color: #f1f8e9;
+  }
+  
+  h2 {
+    color: #388e3c;
+  }
+  
+  h3 {
+    margin-top: 1.5rem;
+    color: #2e7d32;
+  }
+  

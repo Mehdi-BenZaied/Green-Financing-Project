@@ -1,0 +1,39 @@
+<h2 class="title">👑 Tableau de Bord Admin</h2>
+
+<nav class="admin-nav">
+  <button routerLink="/admin/utilisateurs" class="nav-btn">
+    <span>📋 Gérer Utilisateurs</span>
+  </button>
+
+  <button routerLink="/admin/questions" class="nav-btn">
+    <span>❓ Gérer Questions</span>
+  </button>
+
+  <button routerLink="/admin/reponses" class="nav-btn">
+    <span>📝 Voir Réponses</span>
+  </button>
+
+  <button routerLink="/admin/recommandations" class="nav-btn">
+    <span>📊 Recommandations</span>
+  </button>
+
+  <button routerLink="/admin/projets" class="nav-btn">
+    <span>📁 Gérer Projets</span>
+  </button>
+</nav>
+
+<!-- 💡 Ajout de la zone pour afficher le Power BI Dashboard -->
+<div class="dashboard-content">
+  <div class="powerbi-container">
+    <iframe 
+      width="100%" 
+      height="800" 
+      src="https://app.powerbi.com/view?r=eyJrIjoiN2FkNzdmNDMtNmFkYi00NGRhLThmNzctYWM5YTg0MTgwNmIzIiwidCI6ImRiZDY2NjRkLTRlYjktNDZlYi05OWQ4LTVjNDNiYTE1M2M2MSIsImMiOjl9" 
+      frameborder="0" 
+      allowFullScreen="true">
+    </iframe>
+  </div>
+
+  <!-- ⚙️ Partie dynamique Angular si besoin -->
+  <router-outlet></router-outlet>
+</div>

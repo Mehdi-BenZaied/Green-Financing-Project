@@ -1,0 +1,88 @@
+/* Header Container */
+.app-header {
+  background: #042F2E; /* Deep teal for a sleek look */
+  color: #ffffff;
+  padding: 1.5rem 3rem;  /* Balanced spacing for visual comfort */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow for stronger presence */
+  border-bottom: 3px solid #01CDB1; /* Clean separation */
+}
+
+/* Logo Styling */
+.logo {
+  height: 65px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Navigation Links */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Better spacing for improved layout */
+}
+
+.navigation a {
+  color: #A7FFF0;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 20px; /* Soft rounded edges for a polished look */
+  background: rgba(255, 255, 255, 0.1); /* Subtle background for better contrast */
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.navigation a:hover,
+.navigation a.active {
+  background: #01CDB1;
+  color: #042F2E;
+  box-shadow: 0 4px 8px rgba(1, 205, 177, 0.5); /* Elegant glow effect */
+}
+
+/* Login Link with Icon */
+.navigation .login-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #A7FFF0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.navigation .login-link:hover {
+  color: #01CDB1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem 1.5rem;
+  }
+
+  .logo {
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .navigation {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navigation a {
+    width: 100%;
+    padding: 12px 0;
+  }
+}

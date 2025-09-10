@@ -1,0 +1,132 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    color: #343a40;
+  }
+  
+  /* Container for the table */
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* White background for the table */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Table hover effect */
+  table:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Table header styling */
+  thead {
+    background: linear-gradient(90deg, #007bff, #6c757d); /* Blue gradient for the header */
+    color: #ffffff;
+  }
+  
+  th {
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  
+  td {
+    padding: 15px;
+    font-size: 14px;
+    border-top: 1px solid #f1f1f1;
+    background-color: #ffffff; /* Ensuring row background is white */
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Row Hover Effect */
+  tr:hover {
+    background-color: #e9ecef; /* Light gray background for row hover */
+    cursor: pointer;
+  }
+  
+  /* Status column styles */
+  .statut-attente {
+    color: #ffc107;
+    font-weight: bold;
+    background-color: #fff3cd; /* Yellow background for "Attente" */
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .statut-valide {
+    color: #28a745;
+    font-weight: bold;
+    background-color: #d4edda; /* Green background for "Validé" */
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .statut-rejete {
+    color: #dc3545;
+    font-weight: bold;
+    background-color: #f8d7da; /* Red background for "Rejeté" */
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  /* Error message styling */
+  .error {
+    background-color: #f8d7da; /* Red background for error messages */
+    color: #721c24;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #f5c6cb;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Info message styling */
+  .info {
+    background-color: #d1ecf1; /* Blue background for info messages */
+    color: #0c5460;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #bee5eb;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Button Styling (if needed) */
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional responsive adjustments */
+  @media (max-width: 768px) {
+    th, td {
+      font-size: 12px;
+      padding: 10px;
+    }
+  
+    .table {
+      margin: 0 10px;
+    }
+  }
+  

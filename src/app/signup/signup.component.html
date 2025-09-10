@@ -1,0 +1,109 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">🔐 Créer un Compte</h2>
+    <p class="auth-subtitle">Remplissez le formulaire pour vous inscrire</p>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <!-- Nom -->
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder="Nom" formControlName="nom" />
+        <div *ngIf="f['nom']?.invalid && f['nom']?.touched" class="error">
+          Nom requis (min. 3 caractères).
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder="Email" formControlName="email" />
+        <div *ngIf="f['email']?.invalid && f['email']?.touched" class="error">
+          Entrez un email valide.
+        </div>
+      </div>
+
+      <!-- Téléphone -->
+      <div class="input-group">
+        <i class="fas fa-phone"></i>
+        <input type="tel" placeholder="Téléphone" formControlName="telephone" />
+        <div *ngIf="f['telephone']?.invalid && f['telephone']?.touched" class="error">
+          Numéro requis (8 à 15 chiffres).
+        </div>
+      </div>
+
+      <!-- Sélection d'Entreprise -->
+      <div class="input-group">
+        <i class="fas fa-building"></i>
+        <label>Entreprise :</label>
+        <select formControlName="entreprise_id">
+          <option *ngFor="let entreprise of entreprises" [value]="entreprise.entreprise_id">
+            {{ entreprise.nom }}
+          </option>
+          <option value="new">Autre (ajouter une entreprise)</option>
+        </select>
+      </div>
+
+      <!-- Saisie d’une nouvelle entreprise (si sélectionnée) -->
+      <div *ngIf="signupForm.get('entreprise_id')?.value === 'new'">
+        <div class="input-group">
+          <i class="fas fa-building"></i>
+          <input type="text" placeholder="Nom de l'entreprise" formControlName="nouvelle_entreprise" />
+          <div *ngIf="f['nouvelle_entreprise']?.invalid && f['nouvelle_entreprise']?.touched" class="error">
+            Nom de l'entreprise requis.
+          </div>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-industry"></i>
+          <input type="text" placeholder="Secteur d'activité" formControlName="secteur_name" />
+          <div *ngIf="f['secteur_name']?.invalid && f['secteur_name']?.touched" class="error">
+            Secteur d'activité requis.
+          </div>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-users"></i>
+          <input type="text" placeholder="Taille de l'entreprise" formControlName="taille" />
+          <div *ngIf="f['taille']?.invalid && f['taille']?.touched" class="error">
+            Taille de l'entreprise requis.
+          </div>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-euro-sign"></i>
+          <input type="number" placeholder="Chiffre d'affaires" formControlName="chiffre_affaires" />
+          <div *ngIf="f['chiffre_affaires']?.invalid && f['chiffre_affaires']?.touched" class="error">
+            Chiffre d'affaires requis.
+          </div>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" placeholder="Localisation" formControlName="localisation" />
+          <div *ngIf="f['localisation']?.invalid && f['localisation']?.touched" class="error">
+            Localisation requise.
+          </div>
+        </div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="Mot de passe" formControlName="mot_de_passe" />
+        <div *ngIf="f['mot_de_passe']?.invalid && f['mot_de_passe']?.touched" class="error">
+          Minimum 8 caractères requis.
+        </div>
+      </div>
+
+      <!-- Message d’erreur -->
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Bouton Submit -->
+      <button type="submit" class="auth-button" [disabled]="signupForm.invalid">
+        S'inscrire
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Déjà un compte ? <a routerLink="/login">Se connecter</a>
+    </p>
+  </div>
+</div>

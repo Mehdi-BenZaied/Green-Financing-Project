@@ -1,0 +1,60 @@
+<app-header></app-header>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">🔐 Welcome Back</h2>
+    <p class="auth-subtitle">Sign in to access your dashboard</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="auth-form">
+      <!-- Email Input -->
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input 
+          type="email" 
+          placeholder="Email" 
+          formControlName="email"
+          aria-label="Email"
+        />
+        <div 
+          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" 
+          class="error">
+          ❌ Please enter a valid email.
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input 
+          type="password" 
+          placeholder="Password" 
+          formControlName="mot_de_passe"
+          aria-label="Password"
+        />
+        <div 
+          *ngIf="loginForm.get('mot_de_passe')?.invalid && loginForm.get('mot_de_passe')?.touched" 
+          class="error">
+          ❌ Password must be at least 8 characters, include an uppercase letter, lowercase letter, and a number.
+        </div>
+      </div>
+
+      <div class="remember-forgot">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button 
+        type="submit" 
+        class="auth-button"
+        [disabled]="loginForm.invalid || loading">
+        {{ loading ? '🔄 Logging in...' : '🚀 Login' }}
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Don't have an account? <a routerLink="/signup">Create one</a>
+    </p>
+  </div>
+</div>

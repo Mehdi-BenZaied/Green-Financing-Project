@@ -1,0 +1,95 @@
+.table-container {
+    max-width: 100%;
+    margin: 20px auto;
+    overflow-x: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #007BFF;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  td {
+    color: #333;
+  }
+  
+  .edit-btn, .delete-btn, .validate-btn {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-btn { background-color: #ff9800; color: white; }
+  .delete-btn { background-color: #f44336; color: white; }
+  .validate-btn { background-color: #4caf50; color: white; }
+  
+  .export-buttons {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .export-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .export-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .edit-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-form textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .edit-form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  

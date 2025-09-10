@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+mysql-connector-python
+scikit-learn
+xgboost
+joblib
+matplotlib
+sentence-transformers
+numpy
+python-dotenv  
