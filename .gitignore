@@ -19,7 +19,12 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+# .gitignore
 
+__pycache__/
+*.pyc
+node_modules/
+.env
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
