@@ -103,17 +103,22 @@ jobs:
             docker compose version
           fi
         
-      - name: Test Docker Compose Build
+            - name: Test Docker Compose Build
         run: |
           echo "🐳 Testing Docker Compose build..."
           
-          # Create a test environment file
+          # Create backend .env file that matches your docker-compose.yml
           mkdir -p backend
-          touch backend/.env
-          echo "DATABASE_URL=mysql://root:test123@db:3306/test_db" >> backend/.env
-          echo "JWT_SECRET=test-secret-key" >> backend/.env
+          cat > backend/.env << EOF
+          DATABASE_URL=mysql://root:Stage123@@db:3306/stage
+         
+          ENVIRONMENT=test
+          DEBUG=true
+          EOF
           
-          # Use Docker Compose V2 syntax (space, not hyphen)
+          echo "✅ Environment file created with correct credentials"
+          
+          # Build with Docker Compose V2 syntax
           docker compose build
           
           echo "✅ Docker Compose build successful!"
