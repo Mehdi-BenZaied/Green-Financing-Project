@@ -148,7 +148,6 @@ jobs:
           mkdir -p backend
           cat > backend/.env << EOF
           DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD || 'Stage123@' }}@db:3306/${{ secrets.DATABASE_NAME || 'stage' }}
-          JWT_SECRET=${{ secrets.JWT_SECRET || 'fallback-jwt-secret-key' }}
           ENVIRONMENT=test
           DEBUG=true
           CORS_ORIGINS=["http://localhost:4200", "http://localhost:80"]
