@@ -78,7 +78,7 @@ jobs:
           fi
         continue-on-error: true
 
-  # NEW: Add Docker testing
+ # FIXED: Docker testing job
   docker-test:
     name: Docker Build & Test
     runs-on: ubuntu-latest
@@ -91,6 +91,18 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         
+      - name: Install Docker Compose (if needed)
+        run: |
+          # Check if docker compose works
+          if ! docker compose version > /dev/null 2>&1; then
+            echo "Installing docker-compose..."
+            sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+          else
+            echo "✅ Docker Compose V2 is available"
+            docker compose version
+          fi
+        
       - name: Test Docker Compose Build
         run: |
           echo "🐳 Testing Docker Compose build..."
@@ -101,8 +113,8 @@ jobs:
           echo "DATABASE_URL=mysql://root:test123@db:3306/test_db" >> backend/.env
           echo "JWT_SECRET=test-secret-key" >> backend/.env
           
-          # Build all services
-          docker-compose build
+          # Use Docker Compose V2 syntax (space, not hyphen)
+          docker compose build
           
           echo "✅ Docker Compose build successful!"
           
@@ -110,39 +122,41 @@ jobs:
         run: |
           echo "🔍 Testing container health..."
           
-          # Start services in detached mode
-          docker-compose up -d
+          # Start services in detached mode (V2 syntax)
+          docker compose up -d
           
           # Wait for services to start
           sleep 45
           
           # Check if containers are running
-          docker-compose ps
+          docker compose ps
           
           # Test backend health (if you have a health endpoint)
-          if docker-compose exec -T backend curl -f http://localhost:8000/health 2>/dev/null; then
-            echo "✅ Backend health check passed"
+          echo "🔍 Checking backend health..."
+          if docker compose exec -T backend curl -f http://localhost:8000/health 2>/dev/null || docker compose exec -T backend curl -f http://localhost:8000/ 2>/dev/null; then
+            echo "✅ Backend is accessible"
           else
-            echo "⚠️ Backend health check failed (endpoint might not exist yet)"
+            echo "⚠️ Backend health check failed (might be normal if no health endpoint exists)"
           fi
           
           # Test if frontend is accessible
-          if docker-compose exec -T frontend curl -f http://localhost:80/ 2>/dev/null; then
-            echo "✅ Frontend accessibility check passed"
+          echo "🔍 Checking frontend..."
+          if docker compose exec -T frontend curl -f http://localhost:80/ 2>/dev/null; then
+            echo "✅ Frontend is accessible"
           else
-            echo "⚠️ Frontend check failed (might be normal for SPA)"
+            echo "⚠️ Frontend check failed (might be normal for SPA routing)"
           fi
           
           # Show logs for debugging
-          echo "📋 Container logs:"
-          docker-compose logs --tail=50
+          echo "📋 Recent container logs:"
+          docker compose logs --tail=20 backend || true
+          docker compose logs --tail=20 frontend || true
           
         continue-on-error: true
         
       - name: Cleanup Docker
         if: always()
         run: |
-          docker-compose down -v
-          docker system prune -f
-
- 
+          echo "🧹 Cleaning up Docker resources..."
+          docker compose down -v || true
+          docker system prune -f || true
