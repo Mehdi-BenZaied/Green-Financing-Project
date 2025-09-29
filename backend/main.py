@@ -960,12 +960,6 @@ from fastapi import HTTPException
 # Assuming your IntelligentModels class and recommendation function are available
 # Also assuming EnhancedRecommendation is defined
 
-from datetime import datetime
-
-from datetime import datetime
-def is_negative_response(response):
-    response_lower = response.strip().lower()
-    return response_lower in ["non", "pas encore", "je ne sais pas", "jsp", "aucune", "nul", "aucun"]
 
 from fastapi import HTTPException
 from collections import Counter, defaultdict
