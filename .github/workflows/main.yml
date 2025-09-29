@@ -1,0 +1,62 @@
+name: CI/CD Angular + FastAPI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  frontend:
+    name: Angular Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Angular dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Lint Angular
+        run: |
+          cd frontend
+          npm run lint
+
+      - name: Build Angular
+        run: |
+          cd frontend
+          npm run build -- --configuration=production
+
+  backend:
+    name: FastAPI Test & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint Python (optional)
+        run: |
+          cd backend
+          pip install flake8
+          flake8 .
+
+      - name: Test FastAPI
+        run: |
+          cd backend
+          pytest
