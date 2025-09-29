@@ -1028,24 +1028,3 @@ async def recommend_multi_label(client_id: int):
 
     return JSONResponse(content={"themes": reco, "confidence": 0.95})
 
-@app.get("/check_recommendation/{client_id}")
-def check_recommendation(client_id: int):
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-
-        cursor.execute("SELECT recommendation_text FROM client WHERE client_id = %s", (client_id,))
-        result = cursor.fetchone()
-
-        if not result:
-            raise HTTPException(status_code=404, detail="Client non trouvé")
-
-        recommendation_text = result.get("recommendation_text")
-        has_reco = bool(recommendation_text and recommendation_text.strip())
-
-        return {"exists": has_reco}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erreur serveur: {str(e)}")
-    finally:
-        cursor.close()
-        conn.close()
