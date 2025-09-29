@@ -104,7 +104,7 @@ jobs:
           fi
         
             - name: Test Docker Compose Build
-        run: |
+         run: |
           echo "🐳 Testing Docker Compose build..."
           
           # Create backend .env file that matches your docker-compose.yml
