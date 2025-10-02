@@ -155,24 +155,7 @@ jobs:
           
           echo "✅ Environment file created"
           
-      - name: Build Docker images efficiently
-        run: |
-          echo "🔨 Building Docker images with space optimization..."
-          
-          # Check available space before build
-          echo "📊 Available space before build:"
-          df -h
-          
-          # Build with --no-cache to avoid layer buildup and optimize for space
-          DOCKER_BUILDKIT=1 docker compose build \
-            --no-cache \
-            --force-rm \
-            --compress
-          
-          echo "📊 Available space after build:"
-          df -h
-          
-          echo "✅ Docker images built successfully!"
+  
           
       - name: Start services efficiently
         run: |
