@@ -149,6 +149,7 @@ jobs:
           
           echo "✅ Production environment configured"
           
+<<<<<<< HEAD
       - name: Validate Docker Compose
         run: |
           echo "🐳 Validating Docker Compose configuration..."
@@ -156,6 +157,11 @@ jobs:
           echo "✅ Docker Compose syntax is valid"
           
       - name: Check Dockerfile syntax
+=======
+  
+          
+      - name: Start services efficiently
+>>>>>>> 3abc19ef8fd4baeb6b36f41eeaac584c90ca9d8f
         run: |
           echo "🔍 Checking Dockerfile syntax..."
           
